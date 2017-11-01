@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <meta name="description" content="">
+ <meta name="author" content="">
+
+ <title>Walk n Roll - City of San Jose</title>
+
+ <!-- Bootstrap core CSS -->
+ <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+ <!-- Custom fonts for this template -->
+ <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+ <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+ <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+ <!--formden.js communicates with FormDen server to validate fields and submit via AJAX -->
+ <script type="text/javascript" src="https://formden.com/static/cdn/formden.js"></script>
+
+ <!-- Special version of Bootstrap that is isolated to content wrapped in .bootstrap-iso -->
+ <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso12.css" />
+
+ <!--Font Awesome (added because you use icons in your prepend/append)-->
+ <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+ <!-- Inline CSS based on choices in "Settings" tab -->
+ <style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
+
+ <!-- Custom styles for this template -->
+ <link href="css/freelancer.min.css" rel="stylesheet">
+ <!-- Extra JavaScript/CSS added manually in "Settings" tab -->
+ <!-- Include jQuery -->
+ <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+ <!-- Include Date Range Picker -->
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+ <script>
+  $(document).ready(function(){
+  var date_input=$('input[name="date"]'); //our date input has the name "date"
+  var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+  date_input.datepicker({
+   format: 'mm/dd/yyyy',
+   container: container,
+   todayHighlight: true,
+   autoclose: true,
+  })
+ })
+</script>
+
+</head>
+
+<body id="page-top">
+
+ <!-- Navigation -->
+ <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+   <a class="navbar-brand js-scroll-trigger" href="index.html">Walk n Roll - City of San Jose</a>
+   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    Menu
+    <i class="fa fa-bars"></i>
+   </button>
+   <div class="collapse navbar-collapse" id="navbarResponsive">
+    <ul class="navbar-nav ml-auto">
+     <li class="nav-item">
+      <a class="nav-link js-scroll-trigger" href="login.html">Login</a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link js-scroll-trigger" href="signup.html">Signup</a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link js-scroll-trigger" href="about.html">About</a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link js-scroll-trigger" href="contact.html">Contact</a>
+     </li>
+    </ul>
+   </div>
+  </div>
+ </nav>
+
+ <!-- Header -->
+ <header style="padding-bottom: 25px">
+ </header>
+ <!-- Contact Section -->
+ <section id="contact">
+  <div class="container">
+   <!-- HTML Form (wrapped in a .bootstrap-iso div) -->
+   <div class="bootstrap-iso">
+    <div class="container-fluid">
+     <div class="row">
+      <div class="">
+       <div class="formden_header">
+        <h2>Thank You!</h2>
+        <p></p>
+       </div>
+       <form action="arrive.html" class="form-horizontal" method="post">
+
+         <div class="form-group">
+          <div class="col-sm-10 col-sm-offset-2">
+           <input name="_honey" style="display:none" type="text"/>
+           <button class="btn btn-primary " name="submit" type="submit">
+            Submit Another?
+           </button>
+          </div>
+         </div>
+        </form>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+  <div class="scroll-top d-lg-none">
+   <a class="btn btn-primary js-scroll-trigger" href="#page-top">
+    <i class="fa fa-chevron-up"></i>
+   </a>
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Contact Form JavaScript -->
+  <script src="js/jqBootstrapValidation.js"></script>
+  <script src="js/contact_me.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/freelancer.min.js"></script>
+
+ </body>
+
+ </html>
