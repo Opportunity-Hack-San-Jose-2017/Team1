@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2017, Harsha R.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:af="http://walknroll.sanjoseca.gov/jsf/functions"
+                template="/WEB-INF/templates/admin-template.xhtml">
+    <ui:param name="pageName" value="Reports"/>
+    <ui:define name="page.content">
+        <div class="col-12">
+            <p:importEnum type="gov.sanjoseca.programs.walknroll.model.TransportationMode"
+                          var="TransportationMode" allSuffix="ALL_ENUM_VALUES"/>
+
+            <p:dataTable id="dataTable" var="entry" value="#{reportsBean.entries}" paginator="true"
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                         paginatorPosition="bottom">
+                <f:facet name="{Exporters}">
+                    <span style="float: right; margin-right: 5px;">
+                        <p:commandLink class="fa fa-file-excel-o" style="font-size: 150% !important; padding-top: 5px"
+                                       title="Export" ajax="false">
+                            <p:dataExporter type="csv" target="dataTable" fileName="walk-n-roll-report"/>
+                        </p:commandLink>
+                    </span>
+                </f:facet>
+                <p:column headerText="Date" width="100">
+                    <h:outputText value="#{entry.dateTime}">
+                        <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="School">
+                    <h:outputText value="#{entry.institution.name}"/>
+                </p:column>
+
+                <c:forEach items="#{TransportationMode.ALL_ENUM_VALUES}" var="mode">
+                    <p:column headerText="#{mode.message}"
+                              width="#{af:columnWidth(mode.name)}">
+                        <h:outputText value="#{entry.modeDetails[mode]}"/>
+                    </p:column>
+                </c:forEach>
+                <p:column headerText="Weather">
+                    <h:outputText value="#{entry.weather}"/>
+                </p:column>
+            </p:dataTable>
+
+        </div>
+    </ui:define>
+</ui:composition>

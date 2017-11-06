@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2017, Harsha R.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/templates/site-template.xhtml">
+    <ui:param name="statelessPage" value="true"/>
+    <ui:define name="page.content">
+        <!-- Header -->
+        <header class="masthead">
+            <div class="container">
+
+                <img class="img-fluid" src="#{resource['img/bikewalk.png']}" alt="" width="15%"/>
+                <div class="intro-text">
+                    <span class="name">Walk n Roll</span>
+                    <hr class="star-light"/>
+                    <span class="skills">
+                        Walk n’ Roll San José is funded by the Metropolitan Transportation Commission
+                        through its Climate Initiatives Program with the goal of increasing walking and biking to school,
+                        fostering a healthy and active lifestyle, and reducing traffic congestion and related air
+                        pollution, leading to a safer environment within school zones.
+                    </span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Portfolio Grid Section -->
+        <section id="portfolio">
+            <div class="container">
+                <h2 class="text-center">Highlights</h2>
+                <hr class="star-primary"/>
+                <div class="row">
+                    <div class="col-sm-4 portfolio-item">
+                        <a class="portfolio-link" href="#portfolioModal1" data-toggle="modal">
+                            <div class="caption">
+                                <div class="caption-content">
+                                    <i class="fa fa-search-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="#{resource['img/highlights/h1.jpg']}" alt=""/>
+                        </a>
+                    </div>
+                    <div class="col-sm-4 portfolio-item">
+                        <a class="portfolio-link" href="#portfolioModal2" data-toggle="modal">
+                            <div class="caption">
+                                <div class="caption-content">
+                                    <i class="fa fa-search-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="#{resource['img/highlights/h2.jpg']}" alt=""/>
+                        </a>
+                    </div>
+                    <div class="col-sm-4 portfolio-item">
+                        <a class="portfolio-link" href="#portfolioModal3" data-toggle="modal">
+                            <div class="caption">
+                                <div class="caption-content">
+                                    <i class="fa fa-search-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="#{resource['img/highlights/h3.jpg']}" alt=""/>
+                        </a>
+                    </div>
+                    <div class="col-sm-4 portfolio-item">
+                        <a class="portfolio-link" href="#portfolioModal4" data-toggle="modal">
+                            <div class="caption">
+                                <div class="caption-content">
+                                    <i class="fa fa-search-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="#{resource['img/highlights/h4.jpg']}" alt=""/>
+                        </a>
+                    </div>
+                    <div class="col-sm-4 portfolio-item">
+                        <a class="portfolio-link" href="#portfolioModal5" data-toggle="modal">
+                            <div class="caption">
+                                <div class="caption-content">
+                                    <i class="fa fa-search-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="#{resource['img/highlights/h5.jpg']}" alt=""/>
+                        </a>
+                    </div>
+                    <div class="col-sm-4 portfolio-item">
+                        <a class="portfolio-link" href="#portfolioModal6" data-toggle="modal">
+                            <div class="caption">
+                                <div class="caption-content">
+                                    <i class="fa fa-search-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="#{resource['img/highlights/h6.jpg']}" alt=""/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="success" id="about">
+            <div class="container">
+                <h2 class="text-center">About</h2>
+                <hr class="star-light"/>
+                <div class="row">
+                    <div class="col-lg-4 ml-auto">
+                        <p>Walk n’ Roll San Jose Offers the “Five E’s”:</p>
+                        <p/>
+                        <ul>
+                            <li>Education</li>
+                            <li>Encouragement</li>
+                            <li>Engineering</li>
+                            <li>Evaluation</li>
+                            <li>Enforcement</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 mr-auto">
+                        <p>Your child's participation in this program will:</p>
+                        <ul>
+                            <li>Instill healthy and active lifestyle behaviors.</li>
+                            <li>Improve community safety.</li>
+                            <li>Reduce traffic congestion around school zones.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </ui:define>
+    <ui:define name="page.footer.above">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col col-md-4">
+                        <h3>Location</h3>
+                        <p> City of San José <br/>
+                            Department of Transportation <br/>
+                            200 East Santa Clara Street - 8th Floor <br/>
+                            San José, CA 95113</p>
+                    </div>
+                    <div class="footer-col col-md-4">
+                        <h3>Connect with us</h3>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <a class="btn-social btn-outline" href="https://www.facebook.com/WnRSJ/">
+                                    <i class="fa fa-fw fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="btn-social btn-outline" href="https://twitter.com/WnRSJ">
+                                    <i class="fa fa-fw fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="btn-social btn-outline" href="https://www.instagram.com/WnRSJ/">
+                                    <i class="fa fa-fw fa-instagram"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="btn-social btn-outline"
+                                   href="http://www.getstreetsmarts.org/walknroll/">
+                                    <i class="fa fa-fw fa-internet-explorer"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer-col col-md-4">
+                        <h3>About WalknRoll</h3>
+                        <p>Walk n’ Roll program is has a goal of increasing walking and biking to school.
+                            <a href="http://www.getstreetsmarts.org/walknroll/">More details</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
+

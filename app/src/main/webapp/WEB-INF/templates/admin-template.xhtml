@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright 2017, Harsha R.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:p="http://primefaces.org/ui">
+<f:loadBundle var="uiStrings" basename="UIStrings"/>
+<f:view transient="false">
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+            <h:outputStylesheet library="vendor" name="bootstrap/css/bootstrap.min.css"/>
+            <h:outputStylesheet library="vendor" name="font-awesome/css/font-awesome.min.css"/>
+            <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
+            <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+                  type="text/css"/>
+            <!-- Custom styles for this template-->
+            <h:outputStylesheet library="sb-admin" name="css/sb-admin.min.css"/>
+        </f:facet>
+
+        <title>
+            <ui:insert name="page.title">#{uiStrings["site.name"]}</ui:insert>
+        </title>
+
+        <f:facet name="last">
+            <style type="text/css">
+                .ui-widget, .ui-widget .ui-widget {
+                    font-size: 90% !important;
+                }
+
+                .ui-growl {
+                    top: 60px;
+                }
+            </style>
+        </f:facet>
+    </h:head>
+    <h:body class="fixed-nav sticky-footer bg-dark" id="page-top">
+        <h:form id="baseForm">
+            <!-- Navigation-->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+
+                <h:link class="navbar-brand" outcome="/index">Walk N' Roll</h:link>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"/>
+                </button>
+                <p:outputPanel autoUpdate="true" class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage Schools">
+                            <h:link class="nav-link" outcome="/admin/institutions">
+                                <i class="fa fa-fw fa-graduation-cap"/>
+                                <span class="nav-link-text">Schools</span>
+                            </h:link>
+                        </li>
+                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reports">
+                            <h:link class="nav-link" outcome="/admin/reports">
+                                <i class="fa fa-fw fa-pie-chart"/>
+                                <span class="nav-link-text">Reports</span>
+                            </h:link>
+                        </li>
+                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Settings">
+                            <h:link class="nav-link" outcome="/admin/settings">
+                                <i class="fa fa-fw fa-cog"/>
+                                <span class="nav-link-text">Settings</span>
+                            </h:link>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav sidenav-toggler">
+                        <li class="nav-item">
+                            <a class="nav-link text-center" id="sidenavToggler">
+                                <i class="fa fa-fw fa-angle-left"/>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- Search bar, messages & more -->
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-fw fa-bell"/>
+                                <span class="d-lg-none">
+                                    Alerts<span class="badge badge-pill badge-warning">6 New</span>
+                                </span>
+                                <span class="indicator text-warning d-none d-lg-block">
+                                    <i class="fa fa-fw fa-circle"/>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">System Messages</h6>
+                                <div class="dropdown-divider"/>
+                                <ui:repeat value="#{facesContext.messageList}" var="msg">
+                                    <a class="dropdown-item" href="#">
+                                    <span class="#{msg.severity.ordinal == 0 ? 'text-success' : 'text-warning'}">
+                                        <strong><i class="fa fa-long-arrow-up fa-fw"/>#{msg.summary}</strong>
+                                    </span>
+                                        <!--<span class="small float-right text-muted">#{msg.severity}</span>-->
+                                        <div class="dropdown-message small">
+                                            #{msg.detail == null ? msg.summary : msg.detail}
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"/>
+                                </ui:repeat>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                                <i class="fa fa-fw fa-sign-out"/>Logout</a>
+                        </li>
+                    </ul>
+                </p:outputPanel>
+            </nav>
+            <p:growl autoUpdate="true"/>
+
+            <div class="content-wrapper">
+                <div class="container-fluid">
+                    <!-- Breadcrumbs-->
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <h:link outcome="/admin/index">Dashboard</h:link>
+                        </li>
+                        <c:if test="#{pageName != null}">
+                            <li class="breadcrumb-item active">#{pageName}</li>
+                        </c:if>
+                    </ol>
+                    <div class="row">
+                        <ui:insert name="page.content"/>
+                    </div>
+                </div>
+                <!-- /.container-fluid-->
+                <!-- /.content-wrapper-->
+                <footer class="sticky-footer">
+                    <div class="container">
+                        <div class="text-center">
+                            <small>Copyright © City of San Jose, 2017</small>
+                        </div>
+                    </div>
+                </footer>
+                <!-- Scroll to Top Button-->
+                <a class="scroll-to-top rounded" href="#page-top">
+                    <i class="fa fa-angle-up"/>
+                </a>
+                <!-- Logout Modal-->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                <a class="btn btn-primary" href="#{pageContext.request.contextPath}/logout">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bootstrap core JavaScript-->
+                <!--<h:outputScript library="vendor" name="jquery/jquery.min.js"/>-->
+                <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+                <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head"/>
+                <h:outputScript library="vendor" name="bootstrap/js/bootstrap.bundle.min.js"/>
+                <h:outputScript library="vendor" name="jquery-easing/jquery.easing.min.js"/>
+                <h:outputScript library="sb-admin" name="js/sb-admin.min.js"/>
+            </div>
+        </h:form>
+        <ui:insert name="page.content.post.form"/>
+    </h:body>
+</f:view>
+</html>

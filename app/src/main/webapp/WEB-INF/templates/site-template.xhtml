@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright 2017, Harsha R.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<f:loadBundle var="uiStrings" basename="UIStrings"/>
+<f:view transient="#{statelessPage}">
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        </f:facet>
+
+        <title>
+            <ui:insert name="page.title">#{uiStrings["site.name"]}</ui:insert>
+        </title>
+
+        <f:facet name="last">
+            <style type="text/css">
+                .ui-widget, .ui-widget .ui-widget {
+                    font-size: 90% !important;
+                }
+            </style>
+            <link href="#{pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css"
+                  rel="stylesheet" type="text/css"/>
+            <link href="#{pageContext.request.contextPath}/resources/vendor/font-awesome/css/font-awesome.min.css"
+                  rel="stylesheet" type="text/css"/>
+            <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
+            <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+                  type="text/css"/>
+            <h:outputStylesheet library="freelancer" name="css/freelancer.min.css"/>
+        </f:facet>
+    </h:head>
+
+    <h:body id="page-top">
+        <ui:insert name="page.navigation">
+            <!-- Navigation -->
+            <nav class="navbar navbar-expand-lg navbar-light fixed-top #{navbarStyles}" id="mainNav">
+                <div class="container">
+                    <a class="navbar-brand js-scroll-trigger" href="/">Walk n Roll - City of San Jose</a>
+                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        Menu
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item" style="padding:0 10px;">
+                                <h:link class="nav-link btn btn-info" rendered="#{userInfoBean.adminUser}"
+                                        outcome="admin">Admin</h:link>
+                            </li>
+                            <li class="nav-item">
+                                <h:link class="nav-link btn btn-success" outcome="submit-data">Submit Data</h:link>
+                            </li>
+                            <c:if test="#{not userInfoBean.userLoggedIn}">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#{userInfoBean.loginURL}">Login</a>
+                                </li>
+                            </c:if>
+                            <c:if test="#{userInfoBean.userLoggedIn}">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#{pageContext.request.contextPath}/logout">Logout</a>
+                                </li>
+                            </c:if>
+                            <li class="nav-item">
+                                <h:link class="nav-link" outcome="contact-us">Contact</h:link>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </ui:insert>
+
+        <ui:insert name="page.content">
+            <div style="min-height: 500px"/>
+        </ui:insert>
+        <ui:insert name="page.footer">
+            <!-- Footer -->
+            <footer class="text-center">
+                <ui:insert name="page.footer.above"/>
+                <div class="footer-below">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                Copyright (c) WalknRoll - City of San Jose
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+            <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+            <div class="scroll-top d-lg-none">
+                <a class="btn btn-primary js-scroll-trigger" href="#page-top">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </ui:insert>
+
+        <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+        <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head"/>
+        <h:outputScript library="vendor" name="bootstrap/js/bootstrap.bundle.min.js"/>
+        <h:outputScript library="vendor" name="jquery-easing/jquery.easing.min.js"/>
+        <h:outputScript library="js" name="jqBootstrapValidation.js"/>
+        <h:outputScript library="js" name="contact_me.js"/>
+        <h:outputScript library="js" name="freelancer.min.js"/>
+    </h:body>
+</f:view>
+</html>

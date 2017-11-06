@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2017, Harsha R.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!--
+  Created by IntelliJ IDEA.
+  User: hramesh
+  Date: 10/31/17
+  Time: 10:16 PM
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/WEB-INF/templates/admin-template.xhtml">
+    <ui:param name="pageName" value="Educational Institutions"/>
+    <ui:define name="page.content">
+        <div class="col-12">
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:commandButton type="push" value="New" icon="ui-icon-document" update="dialogForm:editDialog"
+                                     actionListener="#{institutionsBean.createNewItem}"
+                                     oncomplete="PF('editDialog').show()"/>
+                </f:facet>
+            </p:toolbar>
+            <p:dataTable id="dataTable" var="school" value="#{institutionsBean.institutions}" paginator="true"
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                         paginatorPosition="bottom">
+                <f:facet name="{Exporters}">
+                    <span style="float: right; margin-right: 5px;">
+                        <p:commandLink class="fa fa-file-excel-o" style="font-size: 150% !important; padding-top: 5px"
+                                       title="Export" ajax="false" immediate="true">
+                            <p:dataExporter type="csv" target="dataTable" fileName="educational-institutions"/>
+                        </p:commandLink>
+                    </span>
+                </f:facet>
+                <p:column headerText="ID" width="150">
+                    <h:outputText value="#{school.id}"/>
+                </p:column>
+                <p:column headerText="Name">
+                    <h:outputText value="#{school.name}"/>
+                </p:column>
+                <p:column headerText="Address">
+                    <h:outputText value="#{school.address}"/>
+                </p:column>
+                <p:column headerText="Authorized Users">
+                    <h:outputText value="#{school.authorizedUsers}"/>
+                </p:column>
+                <p:column headerText="Actions" width="100">
+                    <p:commandButton icon="ui-icon-pencil" title="Edit"
+                                     actionListener="#{institutionsBean.selectCurrentEntry}"
+                                     oncomplete="PF('editDialog').show()" update="dialogForm:editDialog">
+                        <f:attribute name="entry" value="#{school}"/>
+                    </p:commandButton>
+                    <p:commandButton icon="ui-icon-trash" title="Delete"
+                                     actionListener="#{institutionsBean.selectCurrentEntry}"
+                                     oncomplete="PF('confirmDialog').show()" update="deleteRecords">
+                        <f:attribute name="entry" value="#{school}"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+
+        </div>
+    </ui:define>
+    <ui:define name="page.content.post.form">
+        <h:form id="dialogForm">
+            <p:dialog id="editDialog" widgetVar="editDialog" modal="true" minHeight="50"
+                      header="Create / Update" binding="#{requestScope['editDialog']}">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="schoolId" value="ID"/>
+                    <p:inputText id="schoolId" placeholder="Will be generated" disabled="true" readonly="true"
+                                 value="#{institutionsBean.currentEntry.id}"/>
+                    <h:outputLabel for="name" value="School name"/>
+                    <p:inputText id="name" required="true" value="#{institutionsBean.currentEntry.name}"/>
+
+                    <p:outputLabel for="address" value="Address"/>
+                    <p:inputText id="address" placeholder="Street address, Landmark, Cross roads, etc." required="true"
+                                 value="#{institutionsBean.currentEntry.address.address}"/>
+
+                    <p:outputLabel for="zipCode" value="Zip code"/>
+                    <p:inputNumber id="zipCode" value="#{institutionsBean.currentEntry.address.zipCode}" required="true"
+                                   minValue="0" decimalPlaces="0" thousandSeparator=""/>
+
+                    <p:outputLabel for="city" value="City"/>
+                    <p:inputText id="city" value="#{institutionsBean.currentEntry.address.city}" required="true"/>
+
+                    <p:outputLabel for="state" value="State"/>
+                    <p:inputText id="state" value="#{institutionsBean.currentEntry.address.state}" required="true"
+                                 disabled="true" readonly="true"/>
+
+                    <p:outputLabel for="users" value="Authorized Users"/>
+                    <p:inputText id="users" value="#{institutionsBean.currentEntry.authorizedUsers}"
+                                 placeholder="Comma separate list of email IDs"
+                                 title="Comma separate list of email IDs that can submit data for this instituion.">
+                        <f:converter for="users" converterId="string.to.list.converter"/>
+                    </p:inputText>
+
+                </h:panelGrid>
+                <p:commandButton value="Submit" actionListener="#{institutionsBean.saveEntry}"
+                                 oncomplete="PF('editDialog').hide()" update="baseForm:dataTable"/>
+
+            </p:dialog>
+        </h:form>
+        <h:form id="deleteRecords">
+            <p:dialog id="confirmDialog" widgetVar="confirmDialog" modal="true" minHeight="50"
+                      header="Delete">
+                <h:panelGrid columns="1">
+                    <h:outputText
+                            value="Do you wish to delete the record associated with: #{institutionsBean.currentEntry.name}?"/>
+                    <h:panelGroup>
+                        <p:commandButton value="Yes" type="submit" styleClass="ui-confirmdialog-yes"
+                                         icon="ui-icon-check" oncomplete="PF('confirmDialog').hide()"
+                                         actionListener="#{institutionsBean.deleteItem}" update="baseForm:dataTable"/>
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"
+                                         icon="ui-icon-close" onclick="PF('confirmDialog').hide()"/>
+                    </h:panelGroup>
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

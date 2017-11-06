@@ -1,0 +1,86 @@
+[
+    {
+        "name": "Forest Hill Elementary School",
+        "address": {
+            "state": "CA",
+            "city": "San Jose",
+            "zipCode": "95130",
+            "address": "4450 Mccoy Avenue"
+        },
+        "authorizedUsers": [
+            "test@example.com",
+            "teacher@foresthill.com"
+        ]
+    },
+    {
+        "name": "Magnolia Science Academy Santa Clara",
+        "address": {
+            "state": "CA",
+            "city": "San Jose",
+            "zipCode": "95127",
+            "address": "14271 Story Road"
+        },
+        "authorizedUsers": [
+            "test@example.com",
+            "teacher@magnoliascience.com"
+        ]
+    },
+    {
+        "name": "Lynbrook High School",
+        "address": {
+            "state": "CA",
+            "city": "San Jose",
+            "zipCode": "95129",
+            "address": "1280 Johnson Avenue"
+        },
+        "authorizedUsers": [
+            "test@example.com",
+            "teacher@lynbrookhigh.com"
+        ]
+    },
+    {
+        "name": "Northwood Elementary School",
+        "address": {
+            "state": "CA",
+            "city": "San Jose",
+            "zipCode": "95132",
+            "address": "2760 East Trimble Road"
+        }
+    },
+    {
+        "name": "Graystone Elementary School",
+        "address": {
+            "state": "CA",
+            "city": "San Jose",
+            "zipCode": "95120",
+            "address": "6982 Shearwater Drive"
+        }
+    },
+    {
+        "name": "Simonds Elementary School",
+        "address": {
+            "state": "CA",
+            "city": "San Jose",
+            "zipCode": "95120",
+            "address": "6515 Grapevine Way"
+        }
+    },
+    {
+        "name": "Guadalupe Elementary School",
+        "address": {
+            "state": "CA",
+            "city": "San Jose",
+            "zipCode": "95120",
+            "address": "6044 Vera Cruz Drive"
+        }
+    },
+    {
+        "name": "Nelson S. Dilworth Elementary School",
+        "address": {
+            "state": "CA",
+            "city": "San Jose",
+            "zipCode": "95129",
+            "address": "1101 Strayer Drive"
+        }
+    }
+]

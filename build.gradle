@@ -1,0 +1,81 @@
+/*
+ * Copyright 2017, Harsha R.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+group = 'gov.sanjoseca.programs'
+version = '1.0-SNAPSHOT'
+
+subprojects {
+
+    group = rootProject.group
+    version = rootProject.version
+
+    // Common set of repositories that get applied to every project.
+    buildscript {
+        repositories {
+            maven {
+                url 'https://maven-central.storage.googleapis.com'
+            }
+            jcenter()
+            mavenCentral()
+        }
+        dependencies {
+            classpath "org.galaxx.gradle:jandex:1.0.2"
+        }
+    }
+
+    repositories {
+        maven {
+            url 'https://maven-central.storage.googleapis.com'
+        }
+        jcenter()
+        mavenCentral()
+    }
+
+    apply plugin: 'java'
+    dependencies {
+        // Test dependencies
+        testCompile 'org.testng:testng:6.11'
+    }
+
+    test {
+        // enable TestNG support
+        useTestNG()
+        testLogging.showStandardStreams = true
+        beforeTest { descriptor ->
+            logger.lifecycle("test: " + descriptor + "  Running")
+        }
+
+        onOutput { descriptor, event ->
+            logger.lifecycle("test: " + descriptor + ": " + event.message)
+        }
+        afterTest { descriptor, result ->
+            logger.lifecycle("test: " + descriptor + ": " + result)
+        }
+    }
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+// Add the Jandex plugin to all projects that have the 'java' plugin.
+gradle.taskGraph.whenReady {
+    project.subprojects { prj ->
+        prj.apply {
+            apply plugin: 'org.galaxx.gradle.jandex'
+        }
+    }
+}

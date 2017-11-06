@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2017, Harsha R.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                template="/WEB-INF/templates/site-template.xhtml">
+    <ui:param name="statelessPage" value="false"/>
+    <ui:define name="page.content">
+        <style type="text/css">
+            #mainNav {
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            #mainNav .navbar-brand {
+                font-size: 1.5em;
+            }
+        </style>
+        <section>
+            <p:importEnum type="gov.sanjoseca.programs.walknroll.model.TransportationMode"
+                          var="TransportationMode" allSuffix="ALL_ENUM_VALUES"/>
+
+            <div class="container">
+                <div class="row">
+                    <h:form id="data-form">
+                        How did the students arrive at school?
+                        <!-- Form layout -->
+                        <p:panelGrid style="width: 100%" styleClass="">
+                            <p:row>
+                                <p:column colspan="6">
+                                    <p:messages autoUpdate="true"/>
+                                </p:column>
+                            </p:row>
+                            <!-- Top Row -->
+                            <p:row>
+                                <!-- School name -->
+                                <p:column>
+                                    <h:outputText value="School name"/>
+                                </p:column>
+                                <p:column>
+                                    <p:selectOneMenu id="schoolName" value="#{submitDataBean.selectedInstitution}"
+                                                     rendered="#{submitDataBean.schoolSelectionEnabled}">
+                                        <f:converter for="schoolName" converterId="persistent.object.converter"/>
+                                        <f:attribute name="ITEMS" value="#{submitDataBean.institutions}}"/>
+                                        <f:selectItem itemLabel="Select a school" itemValue="#{null}"/>
+                                        <f:selectItems value="#{submitDataBean.institutions}" var="school"
+                                                       itemLabel="#{school.name}" itemValue="#{school}"/>
+                                        <p:ajax immediate="true" event="change" update="@this"/>
+                                    </p:selectOneMenu>
+                                    <h:outputText rendered="#{!submitDataBean.schoolSelectionEnabled}"
+                                                  value="#{submitDataBean.selectedInstitution.name}"/>
+                                </p:column>
+
+                                <!-- Class Grade -->
+                                <p:column>
+                                    <h:outputLabel for="id_grade" value="Grade"/>
+                                </p:column>
+                                <p:column>
+                                    <p:inputText id="id_grade" value="#{submitDataBean.grade}" required="true"/>
+                                </p:column>
+
+                                <!-- Total number of students -->
+                                <p:column>
+                                    <h:outputLabel for="id_nos" value="Number of students enrolled in class"/>
+                                </p:column>
+                                <p:column>
+                                    <p:inputNumber id="id_nos" value="#{submitDataBean.numberOfStudents}"
+                                                   decimalPlaces="0" decimalSeparator=""
+                                                   required="true"/>
+                                </p:column>
+                            </p:row>
+                            <!-- Date selector -->
+                            <p:row>
+                                <p:column colspan="2">
+                                    <h:outputLabel styleClass="col-form-label" for="datePicker">Date</h:outputLabel>
+                                </p:column>
+                                <p:column colspan="4">
+                                    <p:calendar id="datePicker" value="#{submitDataBean.date}" showOn="button"
+                                                required="true" pattern="MM-dd-yyyy" placeholder="MM-DD-YYYY"/>
+                                </p:column>
+                            </p:row>
+                            <!-- Print out all the modes of transport -->
+                            <c:forEach items="#{TransportationMode.ALL_ENUM_VALUES}" var="current">
+                                <p:row>
+                                    <p:column colspan="2">
+                                        <h:outputLabel for="id_#{current.name}" value="#{current.message}"/>
+                                    </p:column>
+                                    <p:column colspan="4">
+                                        <p:inputNumber id="id_#{current.name}" decimalPlaces="0" decimalSeparator=""
+                                                       value="#{submitDataBean.entry.modeDetails[current]}"/>
+                                    </p:column>
+                                </p:row>
+                            </c:forEach>
+                            <!-- Submit button -->
+                            <p:row>
+                                <p:column colspan="6">
+                                    <p:commandButton styleClass="btn btn-primary" value="Submit" update="data-form"
+                                                     actionListener="#{submitDataBean.saveReport}"/>
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+                    </h:form>
+                </div>
+            </div>
+        </section>
+
+    </ui:define>
+</ui:composition>
+

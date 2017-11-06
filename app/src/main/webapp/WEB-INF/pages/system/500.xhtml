@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2017, PayPal. All Rights Reserved.
+  -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/WEB-INF/templates/site-template.xhtml">
+    <f:loadBundle var="uiStrings" basename="UIStrings"/>
+    <ui:param name="statelessPage" value="true"/>
+    <ui:define name="page.title">#{uiStrings['site.error.500.pageTitle']}</ui:define>
+    <ui:define name="page.content">
+        <h:panelGroup style="line-height: 300px;align-content: center; text-align: center" layout="block">
+            #{uiStrings['site.error.500.message']}
+        </h:panelGroup>
+    </ui:define>
+</ui:composition>
